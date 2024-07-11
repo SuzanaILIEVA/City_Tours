@@ -34,7 +34,7 @@ const TourList = ({ searchTerm }) => {
 
   useEffect(() => {
     console.log("Tours state updated: ", tours);
-  }, [tours]);
+  }, [tours,sortTours ]);
 
   // search input
   const filterTours = (term) => {
