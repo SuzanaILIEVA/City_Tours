@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./TourList.scss";
 import Tour from "../Tour/Tour";
 import { tourData } from "../tourData";
@@ -7,15 +7,7 @@ const TourList = ({ searchTerm }) => {
   const [tours, setTours] = useState(tourData);
   const [sortOrder, setSortOrder] = useState("asc");
 
-  useEffect(() => {
-    sortTours(sortOrder);
-  }, [sortOrder]);
-
-  useEffect(() => {
-    filterTours(searchTerm);
-  }, [searchTerm]);
-
-  const sortTours = (order) => {
+  const sortTours = useCallback((order) => {
     const sortedTours = [...tours].sort((a, b) => {
       if (order === "asc") {
         return a.price - b.price;
@@ -25,7 +17,22 @@ const TourList = ({ searchTerm }) => {
     });
     setTours(sortedTours);
     console.log(sortedTours);
-  };
+  }, [tours]);
+
+  const filterTours = useCallback((term) => {
+    const filteredTours = tourData.filter((tour) =>
+      tour.city.toLowerCase().includes(term.toLowerCase())
+    );
+    setTours(filteredTours);
+  }, []);
+
+  useEffect(() => {
+    sortTours(sortOrder);
+  }, [sortOrder, sortTours]);
+
+  useEffect(() => {
+    filterTours(searchTerm);
+  }, [searchTerm, filterTours]);
 
   const handleSortChange = (e) => {
     const newOrder = e.target.value;
@@ -34,15 +41,7 @@ const TourList = ({ searchTerm }) => {
 
   useEffect(() => {
     console.log("Tours state updated: ", tours);
-  }, [tours,sortTours ]);
-
-  // search input
-  const filterTours = (term) => {
-    const filteredTours = tourData.filter((tour) =>
-      tour.city.toLowerCase().includes(term.toLowerCase())
-    );
-    setTours(filteredTours);
-  };
+  }, [tours]);
 
   return (
     <section>
