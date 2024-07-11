@@ -1,0 +1,91 @@
+@import "../../index.scss";
+
+
+.navbar{
+    background: $mainBlack;
+    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 2fr;
+    padding-right: 30px;
+}
+.nav-links{
+    align-self: center;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+   
+}
+
+.nav-link{
+    color: $mainGray;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s linear;
+    &:hover{
+        color: $mainGreen;
+    }
+    
+}
+   .active{color: $mainGreen;}
+
+   .navbar-right{
+    display: flex;
+    align-items: center; 
+    justify-content: end;
+    gap: 30px;
+   
+    .search{
+        display: flex;
+        align-items: center;
+        color: $mainGray;
+        gap: 3px;
+        object-fit: cover;
+        max-width: auto;
+       box-shadow: 0 0 10px white;
+        padding: 2px;
+        border-radius: 8px;
+
+    }
+    input{
+        background: transparent;
+        border: none;
+        outline: none;
+        color: $mainGray;
+        padding: 2px;
+        font-size: 20px;
+    
+    }
+
+   }
+
+   @media screen  and (max-width:768px){
+    .navbar{
+        padding-right: 10px;
+
+        img{
+            width: 60px;
+        }
+    }
+    .nav-links{
+        gap: 20px;
+       
+        
+    }
+    .nav-link{
+        font-size: 15px;
+    }
+   .navbar-right{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+ 
+
+    
+    input{
+        font-size: 18px;
+        width: 100%;
+    }
+}
+   }
